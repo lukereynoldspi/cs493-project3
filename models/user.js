@@ -11,7 +11,7 @@ const User = sequelize.define('user', {
         // Hashing the value with an appropriate cryptographic hash function is better.
         this.setDataValue('password', hash(value));
       }},
-    admin: {type: DataTypes.STRING, allowNull: false}
+    admin: {type: DataTypes.BOOLEAN, defaultValue: false}
 })
 
 exports.User = User
