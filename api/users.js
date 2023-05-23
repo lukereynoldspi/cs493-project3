@@ -3,8 +3,25 @@ const { Router } = require('express')
 const { Business } = require('../models/business')
 const { Photo } = require('../models/photo')
 const { Review } = require('../models/review')
+const { User } = require('../models/user')
 
 const router = Router()
+
+/*
+ * Route to create a new user.
+ */
+router.post('/', async function (req, res, next) {
+  try {
+    const user = await User.create(req.body, UserClientFields)
+    res.status(201).send({ id: user.id })
+  } catch (e) {
+    if (e instanceof ValidationError) {
+      res.status(400).send({ error: e.message })
+    } else {
+      throw e
+    }
+  }
+})
 
 /*
  * Route to list all of a user's businesses.
